@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Maui_Postman_Clone.MainPage">
+             x:Class="MAUIPostmanClone.MainPage">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Wiersz z metodą HTTP i URL -->
             <HorizontalStackLayout Spacing="10">
                 <Picker x:Name="HttpMethodPicker" WidthRequest="100">
                     <Picker.ItemsSource>
@@ -21,23 +20,20 @@
                 </Picker>
                 <Entry x:Name="UrlEntry"
                        Placeholder="Enter request URL"
-                       HorizontalOptions="FillAndExpand" />
+                       HorizontalOptions="Fill" />
             </HorizontalStackLayout>
 
-            <!-- Body (dla POST/PUT) -->
             <Editor x:Name="BodyEditor"
                     Placeholder="Request body (JSON)"
                     AutoSize="TextChanges"
                     HeightRequest="120"
                     IsVisible="False" />
 
-            <!-- Przycisk SEND -->
             <Button Text="Send"
                     Clicked="OnSendClicked"
                     BackgroundColor="Orange"
                     TextColor="White" />
 
-            <!-- Odpowiedź -->
             <Label Text="Response:"
                    FontAttributes="Bold" />
             <Editor x:Name="ResponseEditor"
