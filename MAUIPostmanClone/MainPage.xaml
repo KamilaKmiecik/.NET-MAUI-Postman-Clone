@@ -31,7 +31,7 @@
 
             <Button Text="Send"
                     Clicked="OnSendClicked"
-                    BackgroundColor="Orange"
+                    BackgroundColor="Navy"
                     TextColor="White" />
 
             <Label Text="Response:"

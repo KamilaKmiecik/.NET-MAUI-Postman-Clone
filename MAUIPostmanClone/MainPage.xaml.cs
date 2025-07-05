@@ -1,10 +1,13 @@
-﻿using System.Text;
+﻿using PostmanCloneLibrary;
+using System.Text;
 
 namespace MAUIPostmanClone
 {
     public partial class MainPage : ContentPage
     {
-        readonly HttpClient _client = new();
+
+        //overkill for now, but i am gonna add DI 
+        readonly IAccessAPI _api = new AccessAPI();
 
         public MainPage()
         {
@@ -19,29 +22,26 @@ namespace MAUIPostmanClone
         //
         private async void OnSendClicked(object sender, EventArgs e)
         {
-            try
-            {
-                var method = HttpMethodPicker.SelectedItem?.ToString();
-                var url = UrlEntry.Text?.Trim();
-                if (string.IsNullOrWhiteSpace(url)) return;
+            var method = HttpMethodPicker.SelectedItem?.ToString();
 
-                HttpRequestMessage request = new(new HttpMethod(method), url);
+            var url = UrlEntry.Text?.Trim();
 
-                if (method == "POST" || method == "PUT")
-                {
-                    string jsonBody = BodyEditor.Text ?? "";
-                    request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-                }
+            if (_api.IsValidUrl(url) == false)
+                ResponseEditor.Text = "Invalid Url!";
 
-                var response = await _client.SendAsync(request);
-                string responseText = await response.Content.ReadAsStringAsync();
 
-                ResponseEditor.Text = $"Status: {(int)response.StatusCode} {response.ReasonPhrase}\n\n{responseText}";
-            }
-            catch (Exception ex)
-            {
-                ResponseEditor.Text = $"Error: {ex.Message}";
-            }
+            string result = await _api.ExecuteAPICallAsync(url, HttpActionType.GET);
+
+            /*   if (method == "POST" || method == "PUT")
+               {
+                   string jsonBody = BodyEditor.Text ?? "";
+                   request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+               }*/
+
+            //var response = await _client.SendAsync(request);
+            //string responseText = await response.Content.ReadAsStringAsync();
+
+            ResponseEditor.Text = result;
         }
     }
 

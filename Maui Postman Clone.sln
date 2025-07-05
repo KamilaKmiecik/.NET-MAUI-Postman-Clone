@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostmanCloneLiblary", "MAUIPostamCloneLiblary\PostmanCloneLiblary.csproj", "{4146AB1E-87C0-43C2-83A1-C777C39DB949}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostmanCloneLibrary", "MAUIPostamCloneLiblary\PostmanCloneLibrary.csproj", "{4146AB1E-87C0-43C2-83A1-C777C39DB949}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUIPostmanClone", "MAUIPostmanClone\MAUIPostmanClone.csproj", "{7AD9231B-42ED-4C8F-AB14-2E6FAD164F5E}"
 EndProject
