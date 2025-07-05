@@ -1,9 +1,12 @@
 ﻿
+
+
 namespace PostmanCloneLibrary
 {
     public interface IAccessAPI
     {
-        Task<string> ExecuteAPICallAsync(string url, HttpActionType action, bool formatJson = true);
+        Task<string> APICallAsync(string url, HttpActionType action, string body, bool formatJson = true);
+        Task<string> APICallAsync(string url, HttpActionType action, HttpContent? body = null, bool formatJson = true);
         bool IsValidUrl(string url);
     }
 }

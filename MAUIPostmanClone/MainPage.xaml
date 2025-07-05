@@ -8,15 +8,6 @@
 
             <HorizontalStackLayout Spacing="10">
                 <Picker x:Name="HttpMethodPicker" WidthRequest="100">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>GET</x:String>
-                            <x:String>POST</x:String>
-                            <x:String>PUT</x:String>
-                            <x:String>DELETE</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                    <Picker.SelectedIndex>0</Picker.SelectedIndex>
                 </Picker>
                 <Entry x:Name="UrlEntry"
                        Placeholder="Enter request URL"

@@ -11,17 +11,31 @@ namespace PostmanCloneLibrary
     {
         private readonly HttpClient _client = new();
 
-        public async Task<string> ExecuteAPICallAsync(string url, HttpActionType action, bool formatJson = true)
+        public async Task<string> APICallAsync(string url, HttpActionType action, string body, bool formatJson = true)
         {
-            HttpRequestMessage request = new(new HttpMethod(action.ToString()), url);
+            StringContent contet = new StringContent(body, Encoding.UTF8, "application/json");
+            return await APICallAsync(url, action, contet, formatJson);
+        }
 
-            //if (method == "POST" || method == "PUT")
-            //{
-            //    string jsonBody = BodyEditor.Text ?? "";
-            //    request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-            //}
-
-            var response = await _client.SendAsync(request);
+        public async Task<string> APICallAsync(string url, HttpActionType action, HttpContent? body = null, bool formatJson = true)
+        {
+            HttpResponseMessage? response = null; 
+            switch (action)
+            {
+                case HttpActionType.GET:
+                     response = await _client.GetAsync(url);
+                    break;
+               
+                case HttpActionType.POST:
+                    response = await _client.PostAsync(url, body);
+                    break;
+                case HttpActionType.PUT:
+                    response = await _client.PutAsync(url, body);
+                    break;
+                case HttpActionType.DELETE:
+                    response = await _client.DeleteAsync(url);
+                    break;
+            }
 
             if (response.IsSuccessStatusCode)
             {
@@ -37,9 +51,7 @@ namespace PostmanCloneLibrary
             }
 
             return $"Error status code: {response.StatusCode}";
-
         }
-
 
 
         public bool IsValidUrl(string url)
